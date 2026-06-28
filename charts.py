@@ -31,19 +31,19 @@ def _style(fig: go.Figure, title: str = None) -> go.Figure:
     if title:
         fig.update_layout(title=dict(text=title, font=dict(size=16, color=COLOR_TEXT, family="Helvetica Neue, Arial, sans-serif")))
     
-    # Overriding layout inheritance tracking boundaries
+    # Overriding layout inheritance tracking boundaries (Removed inherit=False)
     fig.update_xaxes(
         showgrid=False, 
         zeroline=False, 
         title_font=dict(color=COLOR_TEXT, size=13),
-        tickfont=dict(color=COLOR_MUTED, size=11, inherit=False)
+        tickfont=dict(color=COLOR_MUTED, size=11)
     )
     fig.update_yaxes(
         showgrid=True, 
         gridcolor=COLOR_GRID, 
         zeroline=False, 
         title_font=dict(color=COLOR_TEXT, size=13),
-        tickfont=dict(color=COLOR_MUTED, size=11, inherit=False)
+        tickfont=dict(color=COLOR_MUTED, size=11)
     )
     
     fig.update_layout(
