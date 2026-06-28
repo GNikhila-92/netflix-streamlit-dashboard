@@ -8,14 +8,13 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-COLOR_TEXT = "#F5F5F1"       # Light gray text for high readability on black canvas
-COLOR_MUTED = "#A3A3A3"      # Muted labels gray
-COLOR_GRID = "#262626"       # Subtle border grid tint lines
+COLOR_TEXT = "#F5F5F1"       
+COLOR_MUTED = "#A3A3A3"      
+COLOR_GRID = "#262626"       
 
-# Vivid theme colors for dark canvas visualization stability
-PALETTE_TRENDS = ["#E50914", "#F5F5F1"]   # Netflix Red / Clean Off-White
-PALETTE_RATINGS = ["#B81D24", "#404040"]  # Medium Crimson / Charcoal Gray
-PALETTE_SCATTER = ["#E50914", "#38BDF8"]  # Red / Electric Sky Blue
+PALETTE_TRENDS = ["#E50914", "#F5F5F1"]   
+PALETTE_RATINGS = ["#B81D24", "#404040"]  
+PALETTE_SCATTER = ["#E50914", "#38BDF8"]  
 
 PLOTLY_LAYOUT = dict(
     paper_bgcolor="rgba(0,0,0,0)",
@@ -31,7 +30,6 @@ def _style(fig: go.Figure, title: str = None) -> go.Figure:
     if title:
         fig.update_layout(title=dict(text=title, font=dict(size=16, color=COLOR_TEXT, family="Helvetica Neue, Arial, sans-serif")))
     
-    # Overriding layout inheritance tracking boundaries (Removed inherit=False)
     fig.update_xaxes(
         showgrid=False, 
         zeroline=False, 
@@ -109,7 +107,12 @@ def country_choropleth(countries_long: pd.DataFrame) -> go.Figure:
         coastlinecolor="#404040",
         landcolor="#171717",
     )
-    fig.update_layout(coloraxis_colorbar=dict(title="Titles Total", titlefont=dict(color=COLOR_TEXT), tickfont=dict(color=COLOR_MUTED)))
+    fig.update_layout(
+        coloraxis_colorbar=dict(
+            title=dict(text="Titles Total", font=dict(color=COLOR_TEXT)),
+            tickfont=dict(color=COLOR_MUTED)
+        )
+    )
     return _style(fig, "Global Distribution Model")
 
 
@@ -148,7 +151,10 @@ def month_year_heatmap(df: pd.DataFrame) -> go.Figure:
             x=month_labels,
             y=pivot.index.astype(int),
             colorscale=[[0, "#171717"], [0.5, "#B81D24"], [1, "#E50914"]],
-            colorbar=dict(title="Volume Scale", titlefont=dict(color=COLOR_TEXT), tickfont=dict(color=COLOR_MUTED)),
+            colorbar=dict(
+                title=dict(text="Volume Scale", font=dict(color=COLOR_TEXT)),
+                tickfont=dict(color=COLOR_MUTED)
+            ),
             hovertemplate="Year: %{y}<br>Month: %{x}<br>Titles added: %{z}<extra></extra>",
         )
     )
